@@ -1,0 +1,65 @@
+jobs:
+  - script: >
+      folder('CD')
+  - script: >
+      folder('Tasks')
+  - script: >
+      pipelineJob('Tasks/RenewCertificates') {
+        triggers {
+          cron('H 0 * * *')
+        }
+        definition {
+          cps {
+            script("""\
+              pipeline {
+                agent any
+                stages {
+                  stage ('test') {
+                    steps {
+                      echo "hello"
+                    }
+                  }
+                }
+              }""".stripIndent())
+              sandbox()
+          }
+        }
+      }
+  - script: >
+      pipelineJob('Tasks/NewJob') {
+        definition {
+          cps {
+            script("""\
+              pipeline {
+                agent any
+                stages {
+                  stage ('test') {
+                    steps {
+                      echo "hello"
+                    }
+                  }
+                }
+              }""".stripIndent())
+              sandbox()
+          }
+        }
+      }
+  - script: >
+      pipelineJob('CD/NewJob') {
+        definition {
+          cps {
+            script("""\
+              pipeline {
+                agent any
+                stages {
+                  stage ('test') {
+                    steps {
+                      echo "hello world"
+                    }
+                  }
+                }
+              }""".stripIndent())
+              sandbox()
+          }
+        }
+      }

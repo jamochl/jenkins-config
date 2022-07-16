@@ -18,6 +18,7 @@ RUN apt update && \
 
 VOLUME /var/jenkins_home
 
+RUN curl https://get.acme.sh | sh -s -- install --force --nocron --accountemail james.lim@jamochl.com
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state

@@ -16,6 +16,12 @@ RUN apt update && \
 	apt update && \
 	apt install -y docker-ce-cli docker-compose-plugin
 
+RUN apt install -y python3-pip && \
+	pip3 install ansible
+
+RUN apt install -y \
+		s3cmd
+
 VOLUME /var/jenkins_home
 
 RUN curl https://get.acme.sh | sh -s -- install --force --nocron --accountemail james.lim@jamochl.com
